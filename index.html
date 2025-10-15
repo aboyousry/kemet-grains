@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KEMET GRAINS - FZCO | Your Trusted Grain Broker</title>
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/BnFFjxxQ/kemet2.png" id="favicon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a472a;
+            --secondary: #2d5a3d;
+            --accent: #d4af37;
+            --dark: #0a1f1a;
+            --light: #f8f9fa;
+            --text: #2d3436;
+            --gold: #d4af37;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 0.8rem 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            height: 55px;
+            width: auto;
+            background: transparent;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .logo-main {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .logo-sub {
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .burger span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            transition: all 0.3s;
+        }
+
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(26, 71, 42, 0.95) 0%, rgba(10, 31, 26, 0.98) 100%), 
+                        url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"%3E%3Cpath fill="%23f4a261" fill-opacity="0.05" d="M0 0h1920v1080H0z"/%3E%3Cpath fill="%23d4af37" fill-opacity="0.03" d="M0 0l1920 1080H0z"/%3E%3C/svg%3E');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 70px;
+        }
+
+        .grain-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 35px,
+                rgba(212, 175, 55, 0.03) 35px,
+                rgba(212, 175, 55, 0.03) 70px
+            );
+            animation: slide 20s linear infinite;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(50px) translateY(50px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            padding: 3rem 2rem;
+            max-width: 1000px;
+        }
+
+        .hero-logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero .tagline {
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+            color: var(--accent);
+            font-style: italic;
+            font-weight: 500;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease 0.6s backwards;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.8s backwards;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease 1s backwards;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .cta-primary {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-secondary:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        .section-divider {
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            margin: 0 auto 3rem;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.9;
+            color: var(--text);
+            font-size: 1.05rem;
+        }
+
+        .about-text strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(26, 71, 42, 0.2);
+        }
+
+        .highlight-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-box li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .highlight-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .expertise-section {
+            background: var(--light);
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .expertise-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .expertise-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .expertise-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .expertise-card p {
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .commodities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .commodity-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .commodity-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+        }
+
+        .commodity-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .commodity-image-icon {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin: 1rem auto;
+            display: block;
+        }
+
+        .commodity-card h3 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .why-choose {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+            margin: 0;
+            max-width: 100%;
+        }
+
+        .why-choose .section-title,
+        .why-choose .section-subtitle {
+            color: white;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .benefit-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.02);
+        }
+
+        .benefit-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .benefit-icon {
+            font-size: 1.8rem;
+        }
+
+        .benefit-card p {
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+
+        #contact {
+            background: var(--light);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info-box {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .contact-info-box h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .contact-icon {
+            font-size: 1.8rem;
+            color: var(--accent);
+            min-width: 35px;
+        }
+
+        .contact-details h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-details p {
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .contact-details a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-details a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .contact-form h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem 2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent);
+            color: var(--dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-brand img {
+            height: 55px;
+            margin-bottom: 1rem;
+            background: transparent;
+        }
+
+        .footer-brand p {
+            opacity: 0.8;
+            line-height: 1.7;
+            margin-top: 1rem;
+        }
+
+        .footer-links h4 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: all 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 968px) {
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .burger {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-content,
+            .contact-grid,
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .tagline {
+                font-size: 1rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .logo-img {
+                height: 40px;
+            }
+
+            .logo-main {
+                font-size: 0.85rem;
+            }
+
+            .logo-sub {
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav" id="navbar">
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="https://i.postimg.cc/BnFFjxxQ/kemet2.png" alt="KEMET GRAINS Logo" class="logo-img" id="mainLogo">
+                <div class="logo-text">
+                    <span class="logo-main">KEMET GRAINS - FZCO</span>
+                    <span class="logo-sub">Your Trusted Grain Broker</span>
+                </div>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#commodities">Commodities</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="burger" id="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="grain-pattern"></div>
+        <div class="hero-content">
+            <h1>KEMET GRAINS - FZCO</h1>
+            <p class="tagline">"Your Trusted Grain Broker"</p>
+            <p class="hero-description">
+                A leading grains and agricultural commodities brokerage firm based in Dubai, U.A.E., serving as a reliable bridge between producers, traders, exporters, and importers across global markets.
+            </p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">25+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">MENA</span>
+                    <span class="stat-label">Regional Focus</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Commodities</span>
+                </div>
+            </div>
+            <div class="cta-buttons">
+                <a href="#contact" class="cta-btn cta-primary">Get In Touch</a>
+                <a href="#commodities" class="cta-btn cta-secondary">Commodities</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">About Us</h2>
+        <p class="section-subtitle">Connecting Global Markets Through Trust & Expertise</p>
+        <div class="section-divider"></div>
+        
+        <div class="about-content">
+            <div class="about-text">
+                <p><strong>KEMET GRAINS - FZCO</strong> is a grain and agricultural Commodities brokerage firm based in Dubai, U.A.E., we serve as a reliable bridge between producers, traders, exporters, and importers.</p>
+                
+                <p>We specialize in the <strong>MENA Region</strong> with main focus on the <strong>Egyptian market</strong>, understanding its unique dynamics, regulations, and opportunities.</p>
+                
+                <p>With <strong>over 25 years of experience in grain markets</strong>, our team has in-depth knowledge of market trends, prices, and conditions, helping you make informed decisions.</p>
+                
+                <p>At KEMET GRAINS, we specialize in connecting global markets through trusted and efficient grain brokerage services—facilitating seamless transactions in the ever-evolving grain industry.</p>
+                
+                <p>With a deep understanding of international trade and market dynamics, our role goes beyond simply matching buyers and sellers. We provide <strong>market intelligence, transparent negotiations, and dependable logistics coordination</strong>, ensuring every deal we broker adds real value to both sides of the supply chain.</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h3>Commitment</h3>
+                <ul>
+                    <li><strong>Integrity:</strong> We conduct every transaction with transparency and honesty</li>
+                    <li><strong>Efficiency:</strong> Streamlined processes for faster, smoother deals</li>
+                    <li><strong>Trust:</strong> Building long-term partnerships, not just one-time deals</li>
+                    <li><strong>Professionalism:</strong> Timely execution and tailored solutions</li>
+                    <li><strong>Market Intelligence:</strong> In-depth knowledge of trends, prices, and conditions</li>
+                    <li><strong>Local Expertise:</strong> Deep understanding of MENA & Egyptian markets</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="expertise" class="expertise-section">
+        <h2 class="section-title">Why Choose KEMET GRAINS</h2>
+        <p class="section-subtitle">Your Partner in Agricultural Trade Excellence</p>
+        <div class="section-divider"></div>
+        
+        <div class="expertise-grid">
+            <div class="expertise-card">
+                <span class="expertise-icon">🎯</span>
+                <h3>Market Intelligence</h3>
+                <p>25+ years of experience providing deep insights into market trends, pricing, and conditions to help you make informed decisions</p>
+            </div>
+            
+            <div class="expertise-card">
+                <span class="expertise-icon">🌍</span>
+                <h3>Regional Expertise</h3>
+                <p>Specialized focus on MENA Region and Egyptian market, understanding unique dynamics, regulations, and opportunities</p>
+            </div>
+            
+            <div class="expertise-card">
+                <span class="expertise-icon">🤝</span>
+                <h3>Transparent Negotiations</h3>
+                <p>We facilitate fair, honest, and transparent negotiations that create value for both buyers and sellers</p>
+            </div>
+            
+            <div class="expertise-card">
+                <span class="expertise-icon">📊</span>
+                <h3>Logistics Coordination</h3>
+                <p>Dependable logistics support ensuring seamless delivery and transaction completion</p>
+            </div>
+            
+            <div class="expertise-card">
+                <span class="expertise-icon">💼</span>
+                <h3>Tailored Solutions</h3>
+                <p>Customized brokerage services designed to meet your specific trading needs and objectives</p>
+            </div>
+            
+            <div class="expertise-card">
+                <span class="expertise-icon">⚡</span>
+                <h3>Efficient Execution</h3>
+                <p>Streamlined processes that reduce costs, increase profitability, and deliver timely results</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="commodities">
+        <h2 class="section-title">Commodities</h2>
+        <p class="section-subtitle">Premium Quality Grains & Agricultural Commodities</p>
+        <div class="section-divider"></div>
+        
+        <div class="commodities-grid">
+            <div class="commodity-card">
+                <img src="https://i.postimg.cc/FzF8Tybv/wheat-2.png" alt="Wheat" class="commodity-image-icon">
+                <h3>Wheat</h3>
+            </div>
+            
+            <div class="commodity-card">
+                <img src="https://i.postimg.cc/vB8ChRdG/feed.png" alt="Feed Corn" class="commodity-image-icon">
+                <h3>Feed Corn</h3>
+            </div>
+            
+            <div class="commodity-card">
+                <img src="https://i.postimg.cc/Qx4hGPw8/barley.png" alt="Barley" class="commodity-image-icon">
+                <h3>Barley</h3>
+            </div>
+            
+            <div class="commodity-card">
+                <img src="https://i.postimg.cc/cJbBpQGQ/soybean.png" alt="Soybeans" class="commodity-image-icon">
+                <h3>Soybeans</h3>
+            </div>
+            
+            <div class="commodity-card">
+                <img src="https://i.postimg.cc/rwngMGNz/soy-bean-oil.png" alt="Sunflower Oil" class="commodity-image-icon">
+                <h3>Sunflower Oil</h3>
+            </div>
+            
+            <div class="commodity-card">
+                <img src="https://i.postimg.cc/tJXJDMmT/soybean-oil.png" alt="Soybean Oil" class="commodity-image-icon">
+                <h3>Soybean Oil</h3>
+            </div>
+            
+            <div class="commodity-card">
+                <img src="https://i.postimg.cc/ZRQsxGqT/sun-flower-meal.png" alt="Sunflower Meal" class="commodity-image-icon">
+                <h3>Sunflower Meal</h3>
+            </div>
+            
+            <div class="commodity-card">
+                <img src="https://i.postimg.cc/rwm31whF/soya-bean-meal.png" alt="Soybean Meal" class="commodity-image-icon">
+                <h3>Soybean Meal</h3>
+            </div>
+            
+            <div class="commodity-card">
+                <img src="https://i.postimg.cc/nrSxBFs3/wheat-bran.png" alt="Wheat Bran" class="commodity-image-icon">
+                <h3>Wheat Bran</h3>
+            </div>
+            
+            <div class="commodity-card">
+                <img src="https://i.postimg.cc/Bv87R13n/sugar-belt.png" alt="Sugar Beet Pulp Pellets" class="commodity-image-icon">
+                <h3>Sugar Beet Pulp Pellets</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-choose">
+        <h2 class="section-title">Benefits of Partnering With Us</h2>
+        <p class="section-subtitle">What You Gain Working With KEMET GRAINS</p>
+        <div class="section-divider"></div>
+        
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <h3><span class="benefit-icon">💡</span>Extensive Expertise</h3>
+                <p>Leverage our 25+ years of grain market experience to navigate complex trading scenarios with confidence and make data-driven decisions.</p>
+            </div>
+            
+            <div class="benefit-card">
+                <h3><span class="benefit-icon">🗺️</span>Local Knowledge</h3>
+                <p>Benefit from our deep understanding of MENA and Egyptian market dynamics, regulations, and opportunities that give you a competitive edge.</p>
+            </div>
+            
+            <div class="benefit-card">
+                <h3><span class="benefit-icon">🎯</span>Real Value Creation</h3>
+                <p>Every deal we broker is structured to add genuine value to both sides of the supply chain, ensuring win-win outcomes.</p>
+            </div>
+            
+            <div class="benefit-card">
+                <h3><span class="benefit-icon">🤝</span>Long-Term Partnerships</h3>
+                <p>Build lasting business relationships based on trust, transparency, and mutual success—not just transactional exchanges.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-subtitle">Let's Start Building a Successful Partnership</p>
+        <div class="section-divider"></div>
+        
+        <div class="contact-grid">
+            <div class="contact-info-box">
+                <h3>Get In Touch</h3>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-details">
+                        <h4>Email</h4>
+                        <p><a href="mailto:info@kemetgrains.com">info@kemetgrains.com</a></p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-details">
+                        <h4>Phone</h4>
+                        <p><a href="tel:+971563666299">+971 56 3666 299</a></p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-details">
+                        <h4>Address</h4>
+                        <p>IFZA Properties, Building A1, Dubai Digital Park<br>
+                        Dubai Silicon Oasis<br>
+                        Dubai, United Arab Emirates</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h3>Send Us a Message</h3>
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Name *</label>
+                            <input type="text" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" placeholder="john@example.com" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Company</label>
+                            <input type="text" placeholder="Your Company Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" placeholder="+971 XX XXX XXXX">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Commodity Interest</label>
+                        <select>
+                            <option value="">Select a commodity...</option>
+                            <option value="wheat">Wheat</option>
+                            <option value="corn">Corn</option>
+                            <option value="barley">Barley</option>
+                            <option value="soybeans">Soybeans</option>
+                            <option value="sunflower-oil">Sunflower Oil</option>
+                            <option value="soybean-oil">Soybean Oil</option>
+                            <option value="sunflower-meal">Sunflower Meal</option>
+                            <option value="soybean-meal">Soybean Meal</option>
+                            <option value="wheat-bran">Wheat Bran</option>
+                            <option value="sugar-beet">Sugar Beet Pulp Pellets</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Message *</label>
+                        <textarea placeholder="Tell us about your requirements..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="https://i.postimg.cc/BnFFjxxQ/kemet2.png" alt="KEMET GRAINS Logo" id="footerLogo">
+                <p><strong>KEMET GRAINS - FZCO</strong><br>"Your Trusted Grain Broker"</p>
+                <p>Connecting global grain markets with integrity, expertise, and trust. Specialized in MENA region with over 25 years of experience.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#expertise">Expertise</a></li>
+                    <li><a href="#commodities">Commodities</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Commodities</h4>
+                <ul>
+                    <li><a href="#commodities">Wheat</a></li>
+                    <li><a href="#commodities">Feed Corn</a></li>
+                    <li><a href="#commodities">Barley</a></li>
+                    <li><a href="#commodities">Soybeans</a></li>
+                    <li><a href="#commodities">Oils & Meals</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 KEMET GRAINS - FZCO. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Logo image URL
+        const logoURL = 'https://i.postimg.cc/BnFFjxxQ/kemet2.png';
+        
+        // Set favicon
+        document.getElementById('favicon').href = logoURL;
+        
+        // Set logo images
+        document.getElementById('mainLogo').src = logoURL;
+        document.getElementById('footerLogo').src = logoURL;
+        
+        // Mobile menu toggle
+        const burger = document.getElementById('burger');
+        const navLinks = document.getElementById('navLinks');
+        const navbar = document.getElementById('navbar');
+
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Contact form submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            contactForm.reset();
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.product-card, .value-card, .expertise-card, .commodity-card, .benefit-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
